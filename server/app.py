@@ -26,15 +26,25 @@ def animal_by_id(id):
         response = make_response(response_body, 404)
         return response
     
-    response_body = f'''
-     <h1>Information about {animal.name}</h1>
-     <h2>Animal species of the animal above is {animal.species}</h2>
-     <h2>The animal's dwelling place is {animal.enclosure.environment}</h2>
+    response_body = '''
+    <html>
+    <head><title>Zookeeper Information</title></head>
+    <body>
+        <h1> The name of the lad/lassie in charge is {{ zookeeper.name }}</h1>
+        <h2> Fortunately, he/she was brought into this world on {{ zookeeper.birthday }}</h2>
+        <h2> The animals he/she takes care of:
+            <ul>
+                {% for animal in zookeeper.animals %}
+                    <li>{{ animal.name }}:{{animal.species}}</li>
+                {% endfor %}
+            </ul>
+        </h2>
+    </body>
+    </html>
     '''
 
-    response = make_response(response_body, 200)
+    return make_response(render_template_string(response_body, zookeeper=zookeeper), 200)
 
-    return response
 
 @app.route('/zookeeper/<int:id>')
 def zookeeper_by_id(id):
@@ -45,15 +55,27 @@ def zookeeper_by_id(id):
         response = make_response(response_body, 404)
         return response
     
-    response_body = f'''
-    <h1> The name of the lad/lassie in charge is {zookeeper.name}</h1>
-    <h2> Fortunately, he/she was brought into this world on {zookeeper.birthday}</h2>
-    <h2> The animals he/she takes care of: <ul><li>{zookeeper.animals}</li></ul></h2>
+    response_body = '''
+    <html>
+    <head><title>Enclosure Information</title></head>
+    <body>
+        <h1>Dwelling place: {{ enclosure.environment }}</h1>
+        <h2>Open To Visitors: {{ enclosure.open_to_visitors }}</h2>
+        <h2>Animals that dwell here:
+            <ul>
+                {% for animal in enclosure.animals %}
+                    <li>{{ animal.name }}: {{animal.species}}</li>
+                {% endfor %}
+            </ul>
+        </h2>
+    </body>
+    </html>
     '''
 
-    response = make_response(response_body, 200)
+    return make_response(render_template_string(response_body, enclosure=enclosure), 200)
 
-    return response
+
+    
 
 @app.route('/enclosure/<int:id>')
 def enclosure_by_id(id):
@@ -77,3 +99,8 @@ def enclosure_by_id(id):
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
+
+
+
+
+
