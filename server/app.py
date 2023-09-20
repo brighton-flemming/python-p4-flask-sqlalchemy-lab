@@ -48,7 +48,7 @@ def zookeeper_by_id(id):
     response_body = f'''
     <h1> The name of the lad/lassie in charge is {zookeeper.name}</h1>
     <h2> Fortunately, he/she was brought into this world on {zookeeper.birthday}</h2>
-    <h2> The animals he/she takes care of <li><ul>{zookeeper.animals.name}</ul></li></h2>
+    <h2> The animals he/she takes care of: <ul><li>{zookeeper.animals}</li></ul></h2>
     '''
 
     response = make_response(response_body, 200)
@@ -68,7 +68,7 @@ def enclosure_by_id(id):
     response_body = f'''
      <h1>Dwelling place: {enclosure.environment}</h1>
      <h2>Open To Visitors: {enclosure.open_to_visitors}</h2>
-     <h2>Animals that dwell here: <li><ul>{enclosure.animals.name}</ul></li></h2>
+     <h2>Animals that dwell here: <ul><li>{enclosure.animals}</li></ul></h2>
     '''
     response = make_response(response_body, 200)
 
