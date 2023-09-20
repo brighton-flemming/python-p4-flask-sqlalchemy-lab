@@ -69,9 +69,10 @@ def enclosure_by_id(id):
      <h1>Dwelling place: {enclosure.environment}</h1>
      <h2>Open To Visitors: {enclosure.open_to_visitors}</h2>
      <h2>Animals that dwell here: <li><ul>{enclosure.animals.name}</ul></li></h2>
-
-
     '''
+    response = make_response(response_body, 200)
+
+    return response
 
 
 if __name__ == '__main__':
