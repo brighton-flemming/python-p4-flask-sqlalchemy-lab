@@ -13,7 +13,8 @@ class Zookeeper(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
     birthday = db.Column(db.Date)
-    animals = db.Column(db.String)
+
+    animals = db.relationship('Animal', backref='zookeeper')
 
 
 class Enclosure(db.Model):
@@ -23,11 +24,15 @@ class Enclosure(db.Model):
     environment = db.Column(db.String)
     open_to_visitors = db.Column(db.Boolean)
 
+    animals = db.relationship('Animal', backref='enclosure')
+
 class Animal(db.Model):
     __tablename__ = 'animals'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
     species = db.Column(db.String)
-    enclosure  = db.Column(db.String)
+
+    enclosure  = db.relationship('Enclosure', backref='animal')
+
 
