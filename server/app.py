@@ -15,11 +15,25 @@ db.init_app(app)
 
 @app.route('/')
 def home():
-    return '<h1>Zoo app</h1>'
+    return '<h1>Zoo app!</h1>'
 
 @app.route('/animal/<int:id>')
 def animal_by_id(id):
-    return ''
+    animal = Animal,query.filter(Animal.id == id).first()
+
+    if not animal:
+        response_body = '<h1>404 animal not found</h1>'
+        response = make_response(response_body, 404)
+        return response
+    response_body = f'''
+     <h1>Information about {animal.name}</h1>
+     <h2>Animal species of the animal above is {animal.species}</h2>
+     <h2>The animal's dwelling place is {animal.enclosure.environment}</h2>
+    '''
+
+    response = make_response(response_body, 200)
+
+    return response
 
 @app.route('/zookeeper/<int:id>')
 def zookeeper_by_id(id):
