@@ -28,9 +28,11 @@ def animal_by_id(id):
     <html>
     <head><title>Animal Information</title></head>
     <body>
-        <h1>Information about {{ animal.name }}</h1>
-        <h2>Animal species of the animal above is {{ animal.species }}</h2>
-        <h2>The animal's dwelling place is {{ animal.enclosure.environment }}</h2>
+        <h1>ID: {{ animal.id}}</h1>
+        <h1>Name: {{ animal.name }}</h1>
+        <h2>Species: {{ animal.species }}</h2>
+        <h2>Dwelling place: {{ animal.enclosure.environment }}</h2>
+        <h2>Zookeeper: {{animal.zookeeper.name}}</h2>
     </body>
     </html>
     '''

@@ -47,6 +47,7 @@ class Animal(db.Model):
     species = db.Column(db.String(300))
 
     enclosures  = db.relationship('Enclosure', backref='animal')
+    zookeepers = db.relationship('Zookeeper', backref='animal')
     zookeeper_id = db.Column(db.Integer, db.ForeignKey('zookeepers.id'))
     enclosure_id = db.Column(db.Integer, db.ForeignKey('enclosures.id'))
 
