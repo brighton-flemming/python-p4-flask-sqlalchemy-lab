@@ -52,8 +52,9 @@ def zookeeper_by_id(id):
     <html>
     <head><title>Zookeeper Information</title></head>
     <body>
-        <h1> The name of the lad/lassie in charge is {{ zookeeper.name }}</h1>
-        <h2> Fortunately, he/she was brought into this world on {{ zookeeper.birthday }}</h2>
+        <h1> ID of the lad/lassie in charge: {{ zookeeper.id }}</h1>
+        <h1> The name of the lad/lassie in charge:{{ zookeeper.name }}</h1>
+        <h2> Fortunately, he/she was brought into this world on: {{ zookeeper.birthday }}</h2>
         <h2> The animals he/she takes care of:
             <ul>
                 {% for animal in zookeeper.animals %}
@@ -79,6 +80,7 @@ def enclosure_by_id(id):
     <html>
     <head><title>Enclosure Information</title></head>
     <body>
+        <h1>ID of the dwelling place: {{ enclosure.id }}</h1>
         <h1>Dwelling place: {{ enclosure.environment }}</h1>
         <h2>Open To Visitors: {{ enclosure.open_to_visitors }}</h2>
         <h2>Animals that dwell here:
