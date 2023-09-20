@@ -22,9 +22,29 @@ def animal_by_id(id):
     animal = Animal.query.filter(Animal.id == id).first()
 
     if not animal:
-        response_body = '<h1>404 animal not found</h1>'
-        response = make_response(response_body, 404)
-        return response
+        return make_response('<h1>404 animal not found</h1>', 404)
+    
+    response_body = '''
+    <html>
+    <head><title>Animal Information</title></head>
+    <body>
+        <h1>Information about {{ animal.name }}</h1>
+        <h2>Animal species of the animal above is {{ animal.species }}</h2>
+        <h2>The animal's dwelling place is {{ animal.enclosure.environment }}</h2>
+    </body>
+    </html>
+    '''
+
+    return make_response(render_template_string(response_body, animal=animal), 200)
+
+    
+
+@app.route('/zookeeper/<int:id>')
+def zookeeper_by_id(id):
+    zookeeper = Zookeeper.query.filter(Zookeeper.id == id).first()
+
+    if not zookeeper:
+        return make_response("<h1>404 zookeeper not found</h1>", 404)
     
     response_body = '''
     <html>
@@ -46,14 +66,12 @@ def animal_by_id(id):
     return make_response(render_template_string(response_body, zookeeper=zookeeper), 200)
 
 
-@app.route('/zookeeper/<int:id>')
-def zookeeper_by_id(id):
-    zookeeper = Zookeeper.query.filter(Zookeeper.id == id).first()
+@app.route('/enclosure/<int:id>')
+def enclosure_by_id(id):
+    enclosure = Enclosure.query.filter(Enclosure.id == id).first()
 
-    if not zookeeper:
-        response_body = "<h1>404 zookeeper not found</h2>"
-        response = make_response(response_body, 404)
-        return response
+    if not enclosure:
+        return make_response('<h1>404 enclosure not found</h1>', 404)
     
     response_body = '''
     <html>
@@ -75,32 +93,11 @@ def zookeeper_by_id(id):
     return make_response(render_template_string(response_body, enclosure=enclosure), 200)
 
 
-    
 
-@app.route('/enclosure/<int:id>')
-def enclosure_by_id(id):
-    enclosure = Enclosure.query.filter(Enclosure.id == id).first()
-
-    if not enclosure:
-        response_body = '<h1>404 enclosure not found</h1>'
-        response = make_response(response_body, 404)
-
-        return response
-    
-    response_body = f'''
-     <h1>Dwelling place: {enclosure.environment}</h1>
-     <h2>Open To Visitors: {enclosure.open_to_visitors}</h2>
-     <h2>Animals that dwell here: <ul><li>{enclosure.animals}</li></ul></h2>
-    '''
-    response = make_response(response_body, 200)
-
-    return response
 
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
-
-
 
 
 
